@@ -1,19 +1,24 @@
 // Copyright 2022 bonzai-example Authors
 // SPDX-License-Identifier: Apache-2.0
 
-package example
+package own
 
 import (
+	"fmt"
 	"log"
 
 	Z "github.com/rwxrob/bonzai/z"
 )
 
-// exported leaf
-var BazCmd = &Z.Cmd{
-	Name: `baz`,
+// private leaf
+var Cmd = &Z.Cmd{
+	Name:    `own`,
+	Summary: "This is an own command",
+
 	Call: func(caller *Z.Cmd, none ...string) error {
-		log.Print("Baz, suncreen song")
+		val, _ := caller.Caller.C("some")
+		fmt.Printf("%s\n", val)
+		log.Print("I'm in my own file.")
 		return nil
 	},
 }
